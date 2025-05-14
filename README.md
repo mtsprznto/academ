@@ -12,3 +12,4 @@ bun dev
 
 https://clerk.com/
 https://ui.shadcn.com/
+https://shipfa.st/tools/logo-fast
