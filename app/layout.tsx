@@ -6,6 +6,7 @@ import "./globals.css";
 
 import { ClerkProvider } from "@clerk/nextjs";
 import { AppSidebar } from "./(routes)/(root)/components";
+import { Navbar, Footer } from "@/components/Shared";
 
 const spaceGrotesk = Space_Grotesk({
   variable: "--font-space-grotesk",
@@ -13,7 +14,7 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
-  title: "Academ",
+  title: "Academ.",
   description: "Academia desc",
 };
 
@@ -28,7 +29,11 @@ export default function RootLayout({
         <body className={`${spaceGrotesk.variable} antialiased`}>
           <SidebarProvider>
             <AppSidebar />
-            <main className="flex-1">{children}</main>
+            <div className="w-full bg-stone-100 flex-col min-h-screen">
+              <Navbar></Navbar>
+              <main className="flex-1">{children}</main>
+              <Footer></Footer>
+            </div>
           </SidebarProvider>
         </body>
       </html>
