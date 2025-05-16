@@ -3,6 +3,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 
 import { z } from "zod";
+import axios from 'axios';
 
 import { Button } from "@/components/ui/button";
 import {
@@ -27,8 +28,19 @@ export function FormCreateCourse() {
   });
 
   // 2. Define a submit handler.
-  const onSubmit = (values: z.infer<typeof formSchema>) => {
-    console.log(values);
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    try {
+      const res = await axios.post("/api/course", values)
+
+      console.log(res);
+      
+
+
+    } catch (error) {
+      console.log(error);
+      
+    }
+
   };
 
   return (
@@ -60,7 +72,7 @@ export function FormCreateCourse() {
             </FormItem>
           )}
         />
-        <Button type="submit">Create course</Button>
+        <Button type="submit" className="cursor-pointer">Create course</Button>
       </form>
     </Form>
   );

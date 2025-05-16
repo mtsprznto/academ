@@ -26,10 +26,10 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en">
-        <body className={`${spaceGrotesk.variable} antialiased`}>
+        <body className={`${spaceGrotesk.className} antialiased`}>
           <SidebarProvider>
             <AppSidebar />
-            <div className="w-full bg-stone-100 flex-col min-h-screen">
+            <div className="w-full bg-stone-100 flex flex-col min-h-screen">
               <Navbar></Navbar>
               <main className="flex-1">{children}</main>
               <Footer></Footer>
