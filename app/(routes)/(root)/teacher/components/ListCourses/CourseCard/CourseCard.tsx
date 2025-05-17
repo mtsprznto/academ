@@ -1,5 +1,7 @@
 import Image from "next/image";
 import { CourseCardProps } from "./CourseCard.types";
+import { ChartNoAxesColumn, DollarSign } from "lucide-react";
+import { Actions } from "./Actions";
 
 export function CourseCard(props: CourseCardProps) {
   const { course } = props;
@@ -41,10 +43,29 @@ export function CourseCard(props: CourseCardProps) {
             )}
 
             <div className="flex flex-col md:flex-row gap-4 items-center">
-                
+              <div className="flex gap-1 items-center text-sm mt-2">
+                <DollarSign className="w-4 h-4 text-gray-400"></DollarSign>
+                <span className="text-gray-400">Price:</span>
+                {price ? (
+                  <span className="font-semibold">{price}</span>
+                ) : (
+                  <span className="font-semibold">0</span>
+                )}
+              </div>
+
+              <div className="flex gap-1 items-center text-sm mt-2">
+                <ChartNoAxesColumn className="w-4 h-4 text-gray-400"></ChartNoAxesColumn>
+                <span className="text-gray-400">Level:</span>
+                {level ? (
+                  <span className="font-semibold">{level}</span>
+                ) : (
+                  <span className="font-semibold">Beginner</span>
+                )}
+              </div>
             </div>
           </div>
         </div>
+        <Actions courseId={id}></Actions>
       </div>
     </div>
   );
