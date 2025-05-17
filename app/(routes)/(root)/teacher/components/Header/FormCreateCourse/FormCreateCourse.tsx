@@ -1,6 +1,7 @@
 "use client";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner"
 
 import { z } from "zod";
 import axios from 'axios';
@@ -16,9 +17,14 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { formSchema } from "./FormCreateCourse.form";
+import { useRouter } from "next/navigation";
 
 export function FormCreateCourse() {
-  // 1. Define your form.
+
+
+  const router = useRouter();
+
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -27,18 +33,16 @@ export function FormCreateCourse() {
     },
   });
 
-  // 2. Define a submit handler.
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
       const res = await axios.post("/api/course", values)
 
-      console.log(res);
-      
-
+      toast("Course successfully created 🎆")
+      router.push(`/teacher/${res.data.id}`);
 
     } catch (error) {
+      toast.error("An error has occurred ⭕")
       console.log(error);
-      
     }
 
   };

@@ -1,5 +1,5 @@
 import { currentUser } from "@clerk/nextjs/server"
-import { Header } from "./components";
+import { Header, ListCourses } from "./components";
 import prisma from "@/lib/prisma";
 
 export default async function TeacherPage() {
@@ -12,11 +12,11 @@ export default async function TeacherPage() {
       userId: user.id,
     }
   })
-  console.log(courses);
   
   return (
     <div>
       <Header></Header>
+      <ListCourses courses={courses}></ListCourses>
     </div>
   )
 }

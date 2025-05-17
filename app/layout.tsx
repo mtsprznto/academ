@@ -7,6 +7,8 @@ import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
 import { AppSidebar } from "./(routes)/(root)/components";
 import { Navbar, Footer } from "@/components/Shared";
+import { Toaster } from "@/components/ui/sonner"
+
 
 const spaceGrotesk = Space_Grotesk({
   variable: "--font-space-grotesk",
@@ -32,6 +34,7 @@ export default function RootLayout({
             <div className="w-full bg-stone-100 flex flex-col min-h-screen">
               <Navbar></Navbar>
               <main className="flex-1">{children}</main>
+              <Toaster />
               <Footer></Footer>
             </div>
           </SidebarProvider>
