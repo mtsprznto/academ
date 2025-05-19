@@ -68,7 +68,7 @@ export function HeaderCourse(props: HeaderCourseProps) {
 
             <Button
               variant={"destructive"}
-              onClick={() => console.log("Eliminar")}
+              onClick={() => removeCourse}
               className="cursor-pointer"
             >
               <Trash></Trash>
