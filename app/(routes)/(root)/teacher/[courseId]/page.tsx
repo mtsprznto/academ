@@ -1,6 +1,6 @@
 import prisma from "@/lib/prisma";
 import { auth } from "@clerk/nextjs/server";
-import { CourseForm, HeaderCourse } from "./components";
+import { CourseForm, CourseImage, HeaderCourse } from "./components";
 
 export default async function Course({
   params,
@@ -33,6 +33,15 @@ export default async function Course({
       ></HeaderCourse>
 
       <CourseForm course={course}></CourseForm>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 my-4">
+        <CourseImage
+          idCourse={course.id}
+          imageCourse={course.imageUrl}
+        ></CourseImage>
+        <p>Course price</p>
+      </div>
+      <p>Course chapters</p>
     </div>
   );
 }

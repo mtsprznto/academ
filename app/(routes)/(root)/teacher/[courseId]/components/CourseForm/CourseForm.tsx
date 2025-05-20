@@ -22,6 +22,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { Textarea } from "@/components/ui/textarea";
 
 import { Input } from "@/components/ui/input";
 
@@ -29,6 +30,8 @@ import { Cog } from "lucide-react";
 import { TitleBlock } from "../TitleBlock";
 import { CourseFormProps } from "./CourseForm.types";
 import { formSchema } from "./CourseForm.form";
+import axios from "axios";
+import { toast } from "sonner";
 
 export function CourseForm(props: CourseFormProps) {
   const { course } = props;
@@ -45,8 +48,15 @@ export function CourseForm(props: CourseFormProps) {
   });
 
   // 2. Define a submit handler.
-  const onSubmit = (values: z.infer<typeof formSchema>) => {
-    console.log(values);
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    try {
+      //console.log(values);
+      axios.patch(`/api/course/${course.id}`, values)
+      toast("Updated course 🥳")
+    } catch (error) {
+      console.log(error);
+      toast.error("Something has gone wrong ❌");
+    }
   };
 
   return (
@@ -144,10 +154,28 @@ export function CourseForm(props: CourseFormProps) {
                 </FormItem>
               )}
             />
+            <FormField
+              control={form.control}
+              name="description"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Description</FormLabel>
+                  <FormControl>
+                    <Textarea
+                      placeholder="Put the description of the course"
+                      className="resize-none"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormDescription>Full course description</FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
           </div>
 
           <Button type="submit" className="cursor-pointer">
-            Submit
+            Save
           </Button>
         </form>
       </Form>
