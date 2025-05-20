@@ -56,7 +56,7 @@ export function CourseImage(props: CourseImageProps) {
       )}
 
       <Button
-        className="w-full mt-4"
+        className="w-full mt-4 cursor-pointer"
         variant={"outline"}
         size={"sm"}
         onClick={() => setIsEditing(!isEditing)}
