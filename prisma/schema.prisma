@@ -4,6 +4,11 @@
 // Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
+//--------------------------
+// Data importante hora 4:00:04 sobre eliminar o modificar este modelo
+// https://www.youtube.com/watch?v=bdGvB3qPR-0 
+//
+
 generator client {
   provider = "prisma-client-js"
 }
@@ -19,7 +24,7 @@ model Course {
   title       String  @db.Text
   slug        String  @unique @db.Text
   description String? @db.Text
-  imageUrl    String?  @db.Text
+  imageUrl    String? @db.Text
   price       String?
   isPublished Boolean @default(false)
   level       String? @db.Text
@@ -36,8 +41,8 @@ model Course {
 model Chapter {
   id          String  @id @default(uuid())
   title       String
-  description String  @db.Text
-  videoUrl    String  @db.Text
+  description String? @db.Text
+  videoUrl    String? @db.Text
   position    Int
   isPublished Boolean @default(false)
   isFree      Boolean @default(false)

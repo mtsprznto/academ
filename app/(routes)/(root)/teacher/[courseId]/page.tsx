@@ -1,6 +1,7 @@
 import prisma from "@/lib/prisma";
 import { auth } from "@clerk/nextjs/server";
 import {
+  ChaptersBlock,
   CourseForm,
   CourseImage,
   CoursePrice,
@@ -49,7 +50,10 @@ export default async function Course({
           priceCourse={course.price}
         ></CoursePrice>
       </div>
-      <p>Course chapters</p>
+      <ChaptersBlock
+        idCourse={course.id}
+        chapters={course.chapters}
+      ></ChaptersBlock>
     </div>
   );
 }
