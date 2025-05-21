@@ -24,7 +24,11 @@ export default async function Course({
       userId: userId,
     },
     include: {
-      chapters: true,
+      chapters: {
+        orderBy: {
+          position: "asc",
+        },
+      },
     },
   });
 
