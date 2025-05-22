@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { TitleBlock } from "../../../components";
 import axios from "axios";
 import { toast } from "sonner";
+import { ChapterTitleForm } from "./ChapterTitleForm";
 
 export function ChapterForm(props: ChapterFormProps) {
   const { chapter, courseId } = props;
@@ -19,13 +20,13 @@ export function ChapterForm(props: ChapterFormProps) {
   const onPublish = async (state: boolean) => {
     try {
       axios.patch(`/api/course/${courseId}/chapter/${chapter.id}`, {
-        isPublished: state
+        isPublished: state,
       });
-      toast(state ? "Published chapter 😉" : "Unpublished chapter 📡")
+      toast(state ? "Published chapter 😉" : "Unpublished chapter 📡");
       router.refresh();
     } catch (error) {
       console.log(error);
-      toast.error("Oops something went wrong ❌")
+      toast.error("Oops something went wrong ❌");
     }
   };
 
@@ -41,8 +42,12 @@ export function ChapterForm(props: ChapterFormProps) {
           Back
         </Button>
       </div>
+      <p className="mt-3">
+        Course status: {chapter.isPublished ? "Public" : "Unpublished"}
+      </p>
       <div className="p-6 mt-6 bg-white rounded-md flex justify-between items-center">
-        <TitleBlock title="Chapter configuration " icon={Cog}></TitleBlock>
+        <TitleBlock title="Chapter configuration" icon={Cog}></TitleBlock>
+
         <div className="gap-2 flex items-center">
           {chapter?.isPublished ? (
             <Button
@@ -71,6 +76,7 @@ export function ChapterForm(props: ChapterFormProps) {
           </Button>
         </div>
       </div>
+      <ChapterTitleForm courseId={courseId} chapter={chapter}></ChapterTitleForm>
     </div>
   );
 }

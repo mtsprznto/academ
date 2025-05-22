@@ -36,13 +36,13 @@ export function HeaderCourse(props: HeaderCourseProps) {
   return (
     <div>
       <div className="mb-4">
-        <div className="flex flex-col md:flex-row justify-between items-center">
+        <div className="flex flex-row md:flex-row justify-between items-center">
           <Button
             className="cursor-pointer"
             onClick={() => router.push("/teacher")}
           >
             <MoveLeft></MoveLeft>
-            Back to all courses
+            Back 
           </Button>
           <div className="gap-2 flex items-center">
             {isPublished ? (
