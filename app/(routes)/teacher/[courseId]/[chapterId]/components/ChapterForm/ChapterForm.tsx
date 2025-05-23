@@ -7,6 +7,7 @@ import { TitleBlock } from "../../../components";
 import axios from "axios";
 import { toast } from "sonner";
 import { ChapterTitleForm } from "./ChapterTitleForm";
+import { ChapterVideoForm } from "./ChapterVideoForm";
 
 export function ChapterForm(props: ChapterFormProps) {
   const { chapter, courseId } = props;
@@ -28,6 +29,12 @@ export function ChapterForm(props: ChapterFormProps) {
       console.log(error);
       toast.error("Oops something went wrong ❌");
     }
+  };
+
+  const removeChapter = async () => {
+    axios.delete(`/api/course/${courseId}/chapter/${chapter.id}`);
+    router.push(`/teacher/${courseId}`);
+    toast("Chapter deleted 🔥")
   };
 
   return (
@@ -70,13 +77,21 @@ export function ChapterForm(props: ChapterFormProps) {
           <Button
             className="cursor-pointer"
             variant={"destructive"}
-            onClick={() => console.log("eliminar")}
+            onClick={removeChapter}
           >
             <Trash></Trash>
           </Button>
         </div>
       </div>
-      <ChapterTitleForm courseId={courseId} chapter={chapter}></ChapterTitleForm>
+      <ChapterTitleForm
+        courseId={courseId}
+        chapter={chapter}
+      ></ChapterTitleForm>
+      <ChapterVideoForm
+        chapterId={chapter.id}
+        courseId={courseId}
+        videoUrl={chapter.videoUrl}
+      ></ChapterVideoForm>
     </div>
   );
 }

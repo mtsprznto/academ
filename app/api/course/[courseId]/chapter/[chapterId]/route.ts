@@ -33,3 +33,28 @@ export async function PATCH(
     }
 
 }
+
+export async function DELETE(
+    req: Request,
+    { params }: { params: Promise<{ courseId: string; chapterId: string }> }
+) {
+    try {
+        const { userId } = await auth();
+        const { courseId, chapterId } = await params;
+
+        if (!userId) {
+            return new NextResponse("Unauthorized", { status: 401 })
+        }
+
+        const chapter = await prisma.chapter.delete({
+            where: {
+                id: chapterId,
+                courseId: courseId,
+            }
+        })
+        return NextResponse.json(chapter);
+    } catch (error) {
+        console.log(error);
+        return new NextResponse("Internal server error", { status: 500 })
+    }
+}
