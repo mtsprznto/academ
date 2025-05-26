@@ -12,7 +12,7 @@ import { toast } from "sonner";
 import { ChapterTitleForm } from "./ChapterTitleForm";
 import { ChapterVideoForm } from "./ChapterVideoForm";
 
-export async function ChapterForm(props: ChapterFormProps) {
+export function ChapterForm(props: ChapterFormProps) {
   const { chapter, courseId } = props;
   const router = useRouter();
 

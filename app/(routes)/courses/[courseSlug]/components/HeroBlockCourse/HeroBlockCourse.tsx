@@ -3,10 +3,12 @@ import { useRouter } from "next/navigation";
 import { HeroBlockCourseProps } from "./HeroBlockCourse.types";
 import { useState } from "react";
 import { IconBadge } from "@/components/Shared";
-import { Calendar, Timer } from "lucide-react";
+import { Calendar, ChartNoAxesColumn, Timer } from "lucide-react";
 import { formatPrice } from "@/lib/formatPrice";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
+import axios from "axios";
+import { toast } from "sonner";
 
 export function HeroBlockCourse(props: HeroBlockCourseProps) {
   const { course, purchaseCourse } = props;
@@ -25,18 +27,35 @@ export function HeroBlockCourse(props: HeroBlockCourseProps) {
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
 
-
-
   const enrollCourse = async () => {
-    console.log("entol course");
+    setIsLoading(true);
+    if (price === "Free") {
+      try {
+        await axios.post(`/api/course/${id}/enroll`);
+        toast("Successful registration 🎉");
+        router.push(`/courses/${slug}/${chapters[0].id}`);
+      } catch (error) {
+        console.log(error);
+        toast.error("Error subscribing ❌");
+      } finally {
+        setIsLoading(true);
+      }
+    } else {
+      try {
+        const response = await axios.post(`/api/course/${id}/checkout`);
+        console.log(response);
+      } catch (error) {
+        toast.error("Error when registering ❌");
+        console.log(error);
+      } finally {
+        setIsLoading(false);
+      }
+    }
   };
   const redirectToCourse = () => {
     router.push(`/courses/${slug}/${chapters[0].id}`);
   };
 
-
-
-  
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
       <div>
@@ -51,6 +70,7 @@ export function HeroBlockCourse(props: HeroBlockCourseProps) {
               "es-ES"
             )}`}
           ></IconBadge>
+          <IconBadge icon={ChartNoAxesColumn} text={level || ""}></IconBadge>
         </div>
 
         <h2 className="text-xl font-semibold my-4">{formatPrice(price)}</h2>
@@ -58,7 +78,7 @@ export function HeroBlockCourse(props: HeroBlockCourseProps) {
         {purchaseCourse ? (
           <Button
             onClick={redirectToCourse}
-            className="hover:bg-violet-400 text-white font-semibold"
+            className="hover:bg-violet-400 text-white font-semibold cursor-pointer"
             disabled={isLoading}
           >
             View course
@@ -66,7 +86,7 @@ export function HeroBlockCourse(props: HeroBlockCourseProps) {
         ) : (
           <Button
             onClick={enrollCourse}
-            className="hover:bg-violet-400 text-white font-semibold"
+            className="hover:bg-violet-400 text-white font-semibold cursor-pointer"
             disabled={isLoading}
           >
             Register now

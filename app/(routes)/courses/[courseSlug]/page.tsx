@@ -3,7 +3,8 @@ import { redirect } from "next/navigation";
 import { getPurchaseCourseById } from "@/actions/getPurchaseCourseById";
 import { getCourseBySlug } from "@/actions/getCourseBySlug";
 
-import { BreadCrumbCourse, HeroBlockCourse } from "./components";
+import { BreadCrumbCourse, CourseContent, HeroBlockCourse } from "./components";
+import { currentUser } from "@clerk/nextjs/server";
 
 export default async function CoursePage({
   params,
@@ -19,9 +20,14 @@ export default async function CoursePage({
     redirect("/");
   }
 
-  const { title, userId, id } = infoCourse;
+  const { title, id } = infoCourse;
 
-  const purchaseCourse = await getPurchaseCourseById(userId, id);
+  const user = await currentUser();
+  if (!user) {
+    redirect("/");
+  }
+
+  const purchaseCourse = await getPurchaseCourseById(user.id, id);
 
   return (
     <div className="max-w-6xl mx-auto">
@@ -31,6 +37,10 @@ export default async function CoursePage({
           course={infoCourse}
           purchaseCourse={purchaseCourse}
         ></HeroBlockCourse>
+      </div>
+
+      <div className="my-4 mx-6 border rounded-lg bg-white p-6">
+        <CourseContent chapters={infoCourse.chapters}></CourseContent>
       </div>
     </div>
   );

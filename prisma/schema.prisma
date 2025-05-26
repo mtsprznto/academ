@@ -86,8 +86,8 @@ model Purchase {
 
 model StripeCustomer {
   id               String @id @default(uuid())
-  userId           String
-  stripeCustomerId String @unique
+  userId           String @unique
+  stripeCustomerId String 
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
