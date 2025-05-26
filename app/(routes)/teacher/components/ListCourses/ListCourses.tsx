@@ -3,7 +3,6 @@ import { ListCoursesProps } from "./ListCourses.types";
 
 export function ListCourses(props: ListCoursesProps) {
   const { courses } = props;
-  console.log(courses);
   if (courses.length === 0) {
     return <p>No courses created</p>;
   }

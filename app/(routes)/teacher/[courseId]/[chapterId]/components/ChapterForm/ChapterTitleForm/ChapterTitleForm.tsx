@@ -17,10 +17,10 @@ import { Input } from "@/components/ui/input";
 
 import { ChapterTitleFormProps } from "./ChapterTitleForm.types";
 import { formSchema } from "./ChapterTitleForm.form";
-import { EditorDescription } from "@/components/Shared";
 import axios from "axios";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
+import { Textarea } from "@/components/ui/textarea";
 
 export function ChapterTitleForm(props: ChapterTitleFormProps) {
   const { chapter, courseId } = props;
@@ -46,7 +46,7 @@ export function ChapterTitleForm(props: ChapterTitleFormProps) {
       router.refresh();
     } catch (error) {
       console.log(error);
-      toast.error("Something has gone wrong ❌")
+      toast.error("Something has gone wrong ❌");
     }
   };
   return (
@@ -76,12 +76,18 @@ export function ChapterTitleForm(props: ChapterTitleFormProps) {
               <FormItem>
                 <FormLabel>Description Chapter</FormLabel>
                 <FormControl>
-                  <EditorDescription {...field}></EditorDescription>
+                  <Textarea
+                    value={field.value}
+                    onChange={field.onChange}
+                    onBlur={field.onBlur}
+                    placeholder="Ingresa la descripción del capítulo..."
+                  ></Textarea>
                 </FormControl>
                 <FormMessage />
               </FormItem>
             )}
           />
+
           <FormField
             control={form.control}
             name="isFree"

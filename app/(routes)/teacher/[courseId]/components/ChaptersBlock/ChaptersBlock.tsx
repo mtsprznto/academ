@@ -34,6 +34,9 @@ export function ChaptersBlock(props: ChaptersBlockProps) {
   }, [chapters]);
 
   const onEditChapter = (chapterId: string) => {
+    
+    
+    
     router.push(`/teacher/${idCourse}/${chapterId}`);
   };
 
@@ -110,11 +113,14 @@ export function ChaptersBlock(props: ChaptersBlockProps) {
               className="flex flex-col gap-2"
             >
               {chaptersList?.map((chapter, index) => (
+                
+                
                 <Draggable
                   key={chapter.id}
                   draggableId={chapter.id}
                   index={index}
                 >
+                  
                   {(provided) => (
                     <div
                       ref={provided.innerRef}
@@ -132,7 +138,8 @@ export function ChaptersBlock(props: ChaptersBlockProps) {
                         ) : (
                           <p className="px-2 py-1">Unpublished</p>
                         )}
-
+                        
+                        
                         <div
                           className="cursor-pointer"
                           onClick={() => onEditChapter(chapter.id)}

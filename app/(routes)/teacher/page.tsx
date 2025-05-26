@@ -13,6 +13,7 @@ export default async function TeacherPage() {
     }
   })
   
+  
   return (
     <div>
       <Header></Header>

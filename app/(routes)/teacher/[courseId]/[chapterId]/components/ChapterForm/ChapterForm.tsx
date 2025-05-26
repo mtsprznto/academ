@@ -1,17 +1,19 @@
 "use client";
-import { Button } from "@/components/ui/button";
-import { ChapterFormProps } from "./ChapterForm.types";
 import { ArrowLeft, Cog, Trash } from "lucide-react";
 import { useRouter } from "next/navigation";
+
+import { Button } from "@/components/ui/button";
+
+import { ChapterFormProps } from "./ChapterForm.types";
 import { TitleBlock } from "../../../components";
+
 import axios from "axios";
 import { toast } from "sonner";
 import { ChapterTitleForm } from "./ChapterTitleForm";
 import { ChapterVideoForm } from "./ChapterVideoForm";
 
-export function ChapterForm(props: ChapterFormProps) {
+export async function ChapterForm(props: ChapterFormProps) {
   const { chapter, courseId } = props;
-
   const router = useRouter();
 
   if (!chapter) {
@@ -34,7 +36,7 @@ export function ChapterForm(props: ChapterFormProps) {
   const removeChapter = async () => {
     axios.delete(`/api/course/${courseId}/chapter/${chapter.id}`);
     router.push(`/teacher/${courseId}`);
-    toast("Chapter deleted 🔥")
+    toast("Chapter deleted 🔥");
   };
 
   return (
@@ -83,10 +85,15 @@ export function ChapterForm(props: ChapterFormProps) {
           </Button>
         </div>
       </div>
+
+      {/* Hay un error en este componente */}
+
       <ChapterTitleForm
         courseId={courseId}
         chapter={chapter}
       ></ChapterTitleForm>
+
+      {/* Este compononente funciona perfecto! */}
       <ChapterVideoForm
         chapterId={chapter.id}
         courseId={courseId}
