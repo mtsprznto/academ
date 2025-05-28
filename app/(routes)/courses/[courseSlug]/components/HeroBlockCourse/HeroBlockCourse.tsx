@@ -43,7 +43,9 @@ export function HeroBlockCourse(props: HeroBlockCourseProps) {
     } else {
       try {
         const response = await axios.post(`/api/course/${id}/checkout`);
-        console.log(response);
+
+        window.location.assign(response.data.url);
+        
       } catch (error) {
         toast.error("Error when registering ❌");
         console.log(error);
@@ -74,7 +76,6 @@ export function HeroBlockCourse(props: HeroBlockCourseProps) {
         </div>
 
         <h2 className="text-xl font-semibold my-4">{formatPrice(price)}</h2>
-
         {purchaseCourse ? (
           <Button
             onClick={redirectToCourse}

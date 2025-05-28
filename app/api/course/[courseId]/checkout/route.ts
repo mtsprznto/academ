@@ -95,6 +95,8 @@ export async function POST(req: Request, { params }: { params: Promise<{ courseI
                 price: course.price ? course.price.toString() : "0"
             },
         });
+        
+
         return NextResponse.json({ url: session.url })
 
 

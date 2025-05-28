@@ -30,3 +30,5 @@ https://stripe.com/es
 EX: acordesamarrillos555
 
 DOCS STRIPE: https://docs.stripe.com/get-started/development-environment?lang=node
+
+
