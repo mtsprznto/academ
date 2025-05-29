@@ -5,7 +5,7 @@ import { getCourseBySlug } from "@/actions/getCourseBySlug";
 import { getIsPurchasedCourse } from "@/actions/getPurchasedCourse";
 import { getUserProgress } from "@/actions/getUserProgress";
 
-import { InfoCourse } from "./components";
+import { ChaptersCourse, InfoCourse } from "./components";
 
 export default async function ChapterCoursePage({
   params,
@@ -43,7 +43,12 @@ export default async function ChapterCoursePage({
           videoUrl={videoUrl}
         ></InfoCourse>
 
-        <div>Chapter course</div>
+        <ChaptersCourse
+          chapters={infoCourse.chapters}
+          courseSlug={courseSlug}
+          chapterCourse={chapterCourse}
+          userProgress={userProgress}
+        ></ChaptersCourse>
       </div>
     </div>
   );

@@ -1,31 +1,44 @@
-"use client"
-import { ProgressCourseProps } from "./ProgressCourse.types";
-import { getUserProgressByCourse } from "@/actions/getUserProgressByCourse";
+"use client";
+import { useEffect, useState } from "react";
+
 import { Progress } from "@/components/ui/progress";
+
+import { ProgressCourseProps } from "./ProgressCourse.types";
 import { formatPrice } from "@/lib/formatPrice";
 import { useUser } from "@clerk/nextjs";
-import { useEffect, useState } from "react";
+import axios from "axios";
 
 export function ProgressCourse(props: ProgressCourseProps) {
   const { courseId, price, totalChapters } = props;
   const { user } = useUser();
 
   const [progressCourse, setProgressCourse] = useState<number>(0);
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const fetchProgress = async () => {
-      if (user?.id) {
-        const progress = await getUserProgressByCourse(user.id, courseId);
-        setProgressCourse(progress);
+      if (!user?.id) return setLoading(false);
+
+      try {
+        const { data } = await axios.post(`/api/get-user-progress`, {
+          courseId,
+          userId: user.id,
+        });
+
+        setProgressCourse(data.progress);
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setLoading(false);
       }
     };
+
     fetchProgress();
-  }, [user?.id]);
+  }, [courseId, user?.id]);
 
   if (!user) {
     return <p className="text-xs mt-2">Not signed in</p>;
   }
-
 
   return (
     <div className="mt-4">
