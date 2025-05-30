@@ -1,4 +1,4 @@
-import { BookOpen, ChartArea, GraduationCap, House, Settings, SquareTerminal } from "lucide-react";
+import { Award, BookOpen, ChartArea, GraduationCap, House, ReceiptText, SquareTerminal } from "lucide-react";
 
 export const routes = [
     {
@@ -17,9 +17,14 @@ export const routes = [
         icon: BookOpen
     },
     {
-        title: "Settings",
-        url: "/settings",
-        icon: Settings
+        title: "Orders",
+        url: "/orders",
+        icon: ReceiptText
+    },
+    {
+        title: "Certificates",
+        url: "/certificates",
+        icon: Award
     },
 
 ]

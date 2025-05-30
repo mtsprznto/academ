@@ -39,6 +39,7 @@ export function ProgressCourse(props: ProgressCourseProps) {
   if (!user) {
     return <p className="text-xs mt-2">Not signed in</p>;
   }
+  if(loading) return <p className="text-xs mt-2">Loading process</p>
 
   return (
     <div className="mt-4">
