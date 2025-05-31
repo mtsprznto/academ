@@ -24,12 +24,12 @@ export async function getSuscriptorsByMonth() {
         return {
             month: format(date, "LLLL", { locale: es }),
             count: 0,
-            date: format(date, "yyyy-MM-dd")
+            date: format(date, "yyyy-MM")
         }
     })
 
     purchases.forEach((purchase) => {
-        const purchaseMonth = format(purchase.createdAt, "yyyy-MM-dd");
+        const purchaseMonth = format(purchase.createdAt, "yyyy-MM");
         const month = months.find((m) => m.date === purchaseMonth);
         if (month) {
             month.count += 1
