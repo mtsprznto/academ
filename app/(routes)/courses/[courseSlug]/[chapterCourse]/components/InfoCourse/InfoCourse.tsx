@@ -12,7 +12,7 @@ export function InfoCourse(props: InfoCourseProps) {
     videoUrl,
   } = props;
 
-  const { title, category, description, price } = infoCourse;
+  const { title, category, description } = infoCourse;
 
   return (
     <div className="w-full relative">

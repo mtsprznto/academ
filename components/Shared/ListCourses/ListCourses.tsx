@@ -2,7 +2,7 @@ import Link from "next/link";
 import { ListCoursesProps } from "./ListCourses.types";
 import Image from "next/image";
 import { IconBadge } from "../IconBadge";
-import { Book, ChartNoAxesColumn, Icon } from "lucide-react";
+import { Book, ChartNoAxesColumn } from "lucide-react";
 import { ProgressCourse } from "./ProgressCourse";
 
 export function ListCourses(props: ListCoursesProps) {

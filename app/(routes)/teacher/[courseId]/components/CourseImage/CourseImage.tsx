@@ -3,7 +3,7 @@
 import { FileImage, Pencil } from "lucide-react";
 import { TitleBlock } from "../TitleBlock";
 import { CourseImageProps } from "./CourseImage.types";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { UploadButton } from "@/utils/uploadthing";
@@ -13,17 +13,23 @@ import axios from "axios";
 export function CourseImage(props: CourseImageProps) {
   const { idCourse, imageCourse } = props;
   const [isEditing, setIsEditing] = useState(false);
+
   const [image, setImage] = useState(imageCourse);
+
+  useEffect(() => {
+    setImage(imageCourse);
+  }, [imageCourse]);
+
   const onChangeImage = async (imageUrl: string) => {
     console.log(imageUrl);
     try {
       axios.patch(`/api/course/${idCourse}`, {
         imageUrl: imageUrl,
       });
-      toast("Image uploaded 🥳")
+      toast("Image uploaded 🥳");
     } catch (error) {
       console.log(error);
-      toast.error("Something has gone wrong ❌")
+      toast.error("Something has gone wrong ❌");
     }
   };
 
@@ -36,8 +42,11 @@ export function CourseImage(props: CourseImageProps) {
           <UploadButton
             endpoint={"imageUploader"}
             onClientUploadComplete={(res) => {
-              onChangeImage(res[0]?.ufsUrl);
-              setImage(res[0]?.ufsUrl);
+              const uploadedUrl = res[0]?.ufsUrl;
+              if (uploadedUrl) {
+                onChangeImage(uploadedUrl);
+                setImage(uploadedUrl); // ✅ Actualiza el estado `image`
+              }
               setIsEditing(false);
             }}
             onUploadError={() => {
@@ -47,7 +56,7 @@ export function CourseImage(props: CourseImageProps) {
         </div>
       ) : (
         <Image
-          src={imageCourse ? imageCourse : "/default-courses.jpg"}
+          src={image ? image : "/default-courses.jpg"}
           alt=""
           width={500}
           height={250}

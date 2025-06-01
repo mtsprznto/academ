@@ -1,3 +1,3 @@
 export type ActionsProps = {
-    courseId: String;
+    courseId: string;
 }

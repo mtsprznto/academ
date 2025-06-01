@@ -1,7 +1,7 @@
-import { Chapter, Course } from "@prisma/client";
+import { Course } from "@prisma/client";
 
 export type CourseFormProps = {
     course: Course;
 }
 
-type CourseWithRelations = Course & {chapters: Chapter[]}
+//type CourseWithRelations = Course & {chapters: Chapter[]}
