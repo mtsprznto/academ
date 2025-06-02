@@ -8,7 +8,7 @@ export default async function MyCoursesPage() {
 
   return (
     <div>
-      <ListCourses title="My courses" courses={courses}></ListCourses>;
+      <ListCourses title="My courses" courses={courses}></ListCourses>
     </div>
   );
 }

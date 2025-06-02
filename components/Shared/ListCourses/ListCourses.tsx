@@ -75,5 +75,5 @@ export function ListCourses(props: ListCoursesProps) {
         )}
       </div>
     </div>
-  );
+  )
 }
